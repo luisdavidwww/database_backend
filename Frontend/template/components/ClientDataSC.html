@@ -1,6 +1,8 @@
 {% extends "Base.html" %}
 {% load static %}
 {% block content %}
+{% load crispy_forms_tags %}
+
     <!-- Contenido -->
     <div class="container" style="background-color: #F5F7FC; height: 550px;">
         <div id="layoutAuthentication_content">
@@ -14,21 +16,16 @@
                                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                                             <div><h6 class="text-center font-weight-light mt-3">Datos del Cliente</h6></div>
                                             <div class="card-body">
-                                                <form>
-                                                    <div class="form-imput">
-                                                        <label  class="small text-muted" for="tipdecuenta">Tipo de Documento</label>
-                                                        <input class="form-control"  type="email" placeholder="name@example.com" />
-                                                    </div>
-                                                    <div class="form-imput mt-2">
-                                                        <label  class="small text-muted" for="tipdecuenta">Contraseña</label>
-                                                        <input class="form-control" id="inputPassword" type="password" placeholder="">
-                                                    </div>
-                                                    <div class="form-Cod mt-2">
-                                                        <label  class="small text-muted" for="tipdecuenta">Codigo</label>
-                                                        <input class="form-control" id="" type="password" placeholder="">
-                                                    </div>
+                                                                                            
+                                                {% if error %}
+                                                    <p class="alert alert-danger">{{ error }}</p>
+                                                {% endif%}
+                                                <form method="post">
+                                                    {% csrf_token %}
+
+                                                    {{ form | crispy }}
                                                     <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
-                                                        <a class="btn btn-primary" href="{% url 'Form1SC' %}">Aceptar</a>
+                                                        <button type="submit" class="btn btn-primary">Aceptar</button>
                                                     </div>
                                                 </form>
                                             </div>
